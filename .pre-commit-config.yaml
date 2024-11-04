@@ -1,0 +1,46 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: "v5.0.0"
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-yaml
+
+  - repo: https://github.com/psf/black
+    rev: "24.8.0"
+    hooks:
+      - id: black
+        language_version: python3.12
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: "7.1.1"
+    hooks:
+      - id: flake8
+        additional_dependencies: [flake8-bugbear, flake8-docstrings]
+
+  - repo: https://github.com/pre-commit/mirrors-isort
+    rev: "v5.10.1"
+    hooks:
+      - id: isort
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: "v1.11.2"
+    hooks:
+      - id: mypy
+        additional_dependencies: [types-requests]
+
+  - repo: local
+    hooks:
+      - id: run-python-tests
+        name: Run Python Unit Tests
+        entry: pytest
+        language: system
+        pass_filenames: false
+        stages: [pre-commit, pre-push]
+      - id: generate-docs
+        name: Generate Documentation with pdoc
+        pass_filenames: false
+        entry: pdoc src/ --output-dir docs
+        language: system
+        stages: [post-commit, pre-push]
+        always_run: true

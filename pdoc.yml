@@ -1,0 +1,4 @@
+modules:
+  src:
+    show_source: true
+    include_undocumented: false
