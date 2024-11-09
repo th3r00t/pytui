@@ -47,3 +47,5 @@ nosetests.xml
 
 # VSCode config
 .vscode
+release/*
+tests/settings.json
